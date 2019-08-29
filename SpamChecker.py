@@ -41,19 +41,18 @@ def make_Dictionary(train_dir):
 
 #extract fatures of training data
 def extract_features(mail_dir):
-    files = [os.path.join(mail_dir, file_descriptor) for file_descriptor in os.listdir(mail_dir)]
-    #create matrix with zeros
+    files = [os.path.join(mail_dir, file_descriptor) for file_descriptor in os.listdir(mail_dir)
     features_matrix = np.zeros((len(files),3000))
     doc_id = 0
     for file_to_read in files:
         with open(file_to_read) as file_descriptor:
-            for i,line in enumerate(file_descriptor):
+            for i, line in enumerate(file_descriptor):
                 if i == 2:
                     words = line.split()
                     for word in words:
                         word_id = 0
-                        for i, d in enumerate(dictionary):
-                            if d[0] == word:
+                        for i, id in enumerate(dictionary):
+                            if id[0] == word:
                                 word_id = i
                                 features_matrix[doc_id, word_id] = words.count(word)
             doc_id = doc_id + 1
